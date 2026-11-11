@@ -23,7 +23,7 @@ This is the starting point for every team. It already has the setup done, so you
 - A Gemini agent loop with function calling: Gemini picks a tool, Zod checks the arguments, your code runs it, and the result goes back to Gemini
 - 3 example tools on a `tasks` table: `listTasks` (reads), `createTask` (writes) and `completeTask` (writes)
 - A chat screen that shows every tool the agent used
-- An example REST API (`/api/tasks`) and a live data list
+- CampusBite menu, wallet/order, and kitchen APIs with refreshing student views
 - Seed data for all 6 problem statements in `seed/`
 
 ## Setup (about 30 minutes)
@@ -44,14 +44,17 @@ To check your settings, open `/api/health`. It shows which variables are missing
 
 ```
 app/
-  page.tsx               Home page: agent chat + data list   <- change
+  page.tsx               Student home: agent chat + wallet + menu
   login/page.tsx         Passcode page
   api/agent/route.ts     POST /api/agent: runs the agent
-  api/tasks/route.ts     Example REST API                    <- copy for your tables
+  api/menu/route.ts      GET /api/menu: canteen menu
+  api/me/route.ts        GET /api/me: wallet and recent orders
+  api/kitchen/route.ts   Kitchen order queue and status updates
   api/health/route.ts    Shows which settings are missing
 components/
-  AgentChat.tsx          Chat UI that shows tool calls       <- change the sample prompts
-  TaskList.tsx           Example data list                   <- replace with your data
+  AgentChat.tsx          Chat UI that shows tool calls
+  WalletOrders.tsx       Student wallet and recent orders
+  MenuPanel.tsx          Canteen menu
 lib/
   agent/tools.ts         THE AGENT TOOLS                     <- your main work
   agent/systemPrompt.ts  Instructions for Gemini             <- rewrite for your problem
